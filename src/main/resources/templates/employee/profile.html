@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 800px;
+      margin: 50px auto;
+      background: #fff;
+      padding: 30px 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 25px;
+      font-size: 32px;
+    }
+    p {
+      font-size: 16px;
+      color: #555;
+      margin: 10px 0;
+    }
+    strong {
+      color: #222;
+    }
+    input, button {
+      font-size: 16px;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    input {
+      width: 100%;
+      box-sizing: border-box;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      background: #fafafa;
+      margin-bottom: 10px;
+      padding: 12px;
+      border-radius: 6px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: 1px solid #ddd;
+    }
+    li span {
+      font-weight: bold;
+      color: #333;
+    }
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+      justify-content: center;
+    }
+    button {
+      cursor: pointer;
+      transition: background 0.3s ease;
+      border: none;
+      color: white;
+    }
+    .edit-btn {
+      background: #ffc107;
+    }
+    .edit-btn:hover {
+      background: #e0a800;
+    }
+    .save-btn {
+      background: #007bff;
+      display: none;
+    }
+    .save-btn:hover {
+      background: #0056b3;
+    }
+    .rounded-btn {
+      padding: 8px 15px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-size: 14px;
+      color: #fff;
+      font-weight: bold;
+      display: inline-block;
+      transition: background 0.3s ease;
+    }
+    .view-btn {
+      background: #007bff;
+    }
+    .view-btn:hover {
+      background: #0056b3;
+    }
+    .download-btn {
+      background: #28a745;
+    }
+    .download-btn:hover {
+      background: #218838;
+    }
+  </style>
+  <script>
+    function enableEditing() {
+        document.getElementById("firstName").removeAttribute("readonly");
+        document.getElementById("lastName").removeAttribute("readonly");
+        document.getElementById("personalEmail").removeAttribute("readonly");
+
+        document.getElementById("editBtn").style.display = "none";
+        document.getElementById("saveBtn").style.display = "inline-block";
+    }
+  </script>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="container">
+    <h1>Employee Profile</h1>
+
+    <form th:action="@{/employee/profile}" method="post">
+      <input type="hidden" name="id" th:value="${employee.id}">
+
+      <p>Company Email: <strong th:text="${employee.companyEmail}"></strong></p>
+      <p>Employee Code: <strong th:text="${employee.employeeCode}"></strong></p>
+
+      <label>First Name:</label>
+      <input type="text" id="firstName" name="firstName" th:value="${employee.firstName}" readonly required>
+
+      <label>Last Name:</label>
+      <input type="text" id="lastName" name="lastName" th:value="${employee.lastName}" readonly required>
+
+      <label>Personal Email:</label>
+      <input type="email" id="personalEmail" name="personalEmail" th:value="${employee.personalEmail}" readonly required>
+
+      <!-- Document Section -->
+      <h2>Documents</h2>
+      <ul>
+        <li th:each="doc : ${employee.documents}">
+          <span th:text="${doc.documentType}"></span>
+          <div class="actions">
+            <a th:href="@{/employee/view/{id}(id=${doc.id})}" target="_blank" class="rounded-btn view-btn">View</a>
+            <a th:href="@{/employee/download/{id}(id=${doc.id})}" download class="rounded-btn download-btn">Download</a>
+          </div>
+        </li>
+      </ul>
+
+      <!-- Edit & Save Buttons -->
+      <div class="actions">
+        <button type="button" id="editBtn" class="edit-btn" onclick="enableEditing()">Edit</button>
+        <button type="submit" id="saveBtn" class="save-btn">Save</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>

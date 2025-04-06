@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      margin: 0;
+      padding: 0;
+    }
+    .pending-container {
+      max-width: 500px;
+      margin: 100px auto;
+      padding: 40px 30px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+    .pending-container h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 28px;
+    }
+    .pending-container p {
+      color: #555;
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="pending-container">
+    <h1>Registration Pending</h1>
+    <p>Your registration is pending approval by HR. You will receive an email once approved.</p>
+  </div>
+</div>
+</body>
+</html>

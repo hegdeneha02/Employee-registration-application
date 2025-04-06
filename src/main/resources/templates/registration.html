@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head>
+    <style>
+        body {
+          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          background: #eef2f3;
+          margin: 0;
+          padding: 0;
+        }
+        .registration-container {
+          max-width: 600px;
+          margin: 50px auto;
+          background: #fff;
+          padding: 40px;
+          border-radius: 8px;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .registration-container h1 {
+          text-align: center;
+          margin-bottom: 30px;
+          color: #333;
+          font-size: 28px;
+        }
+        .registration-container form label {
+          display: block;
+          margin-bottom: 15px;
+          font-size: 16px;
+          color: #555;
+        }
+        .registration-container form input[type="text"],
+        .registration-container form input[type="email"],
+        .registration-container form input[type="file"] {
+          width: 100%;
+          padding: 10px;
+          margin-top: 5px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          box-sizing: border-box;
+          font-size: 15px;
+        }
+        .registration-container h3 {
+          margin-top: 30px;
+          margin-bottom: 15px;
+          color: #444;
+          font-size: 20px;
+          border-bottom: 1px solid #ddd;
+          padding-bottom: 5px;
+        }
+        .registration-container button {
+          width: 100%;
+          padding: 12px;
+          background: #007bff;
+          border: none;
+          color: #fff;
+          font-size: 16px;
+          border-radius: 4px;
+          cursor: pointer;
+          transition: background 0.3s ease;
+        }
+        .registration-container button:hover {
+          background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="registration-container">
+        <h1>Employee Registration</h1>
+        <form th:action="@{/register}" method="post" enctype="multipart/form-data">
+            <label>
+                First Name:
+                <input type="text" name="firstName" required placeholder="Enter your first name">
+            </label>
+            <label>
+                Last Name:
+                <input type="text" name="lastName" required placeholder="Enter your last name">
+            </label>
+            <label>
+                Personal Email:
+                <input type="email" name="personalEmail" required placeholder="Enter your email">
+            </label>
+            <h3>Upload Documents</h3>
+            <label>
+                Aadhar:
+                <input type="file" name="aadhar" required>
+            </label>
+            <label>
+                PAN:
+                <input type="file" name="pan" required>
+            </label>
+            <label>
+                Degree Certificate:
+                <input type="file" name="degree" required>
+            </label>
+            <label>
+                Photo Proof:
+                <input type="file" name="photo" required>
+            </label>
+            <button type="submit">Register</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
